@@ -28,11 +28,13 @@ def set_background(image_file):
         unsafe_allow_html=True
     )
 
-# Set the background image
-set_background(r"App3/Images/building-national-bank-switzerland-bern-bundesplatz-square-42890295.webp")
 
-img_contact_form = Image.open(r"C:\Users\gokul\Documents\GitHub\App\App3\Images\building-national-bank-switzerland-bern-bundesplatz-square-42890295.webp")
+# Open the image using the relative path
+img_contact_form = Image.open(r'C:\Users\gokul\Documents\GitHub\App\App3\Images\building-national-bank-switzerland-bern-bundesplatz-square-42890295.webp')
+
+# Use the image in your app (e.g., display it)
 st.image(img_contact_form, use_column_width=True)
+
 
 # Load the pre-trained machine learning model
 def load_model():
