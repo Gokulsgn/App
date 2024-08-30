@@ -6,7 +6,7 @@ import os
 # Set the path to your model file
 model_path = 'trained_model.pkl'  # Adjust if the model is in a subdirectory
 
-# Load the trained model
+# Check if model file exists and load it
 def load_model(model_path):
     if os.path.exists(model_path):
         try:
