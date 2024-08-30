@@ -16,7 +16,7 @@ st.markdown("<h1 class='title'>Loan Status Prediction</h1>", unsafe_allow_html=T
 
 # Load the pre-trained machine learning model
 def load_model():
-    with open(r'C:\Users\gokul\Documents\GitHub\App\App3\loan_LR_model.pkl', 'rb') as file:
+    with open('loan_LR_model.pkl', 'rb') as file:
         model = pickle.load(file)
     return model
 
