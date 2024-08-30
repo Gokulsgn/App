@@ -3,7 +3,7 @@ import joblib
 import os
 
 # Set the path to the model file (update to your actual model path)
-model_path = r'C:\Users\gokul\Documents\GitHub\App\App5\trained_model.pkl'
+model_path = 'trained_model.pkl'
 
 # Display the current working directory for debugging purposes
 st.text(f"Current working directory: {os.getcwd()}")
