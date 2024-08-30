@@ -3,18 +3,35 @@ import numpy as np
 import joblib
 import os
 
+# Set the path to the model file (update this to your actual model path)
+model_path = r'C:\Users\gokul\Documents\GitHub\App\App5\trained_model.pkl'
+
 # Load the trained model
-model_path = r'C:\Users\gokul\Documents\GitHub\App\App5\trained_model.pkl'  # Update to your actual model path
-if os.path.exists(model_path):
-    model = joblib.load(model_path)
-else:
-    st.error("Model file not found. Please check the path.")
+def load_model(model_path):
+    if os.path.exists(model_path):
+        try:
+            model = joblib.load(model_path)
+            st.success("Model loaded successfully!")
+            return model
+        except Exception as e:
+            st.error(f"An error occurred while loading the model: {e}")
+            return None
+    else:
+        st.error("Model file not found. Please check the path.")
+        st.text(f"Checked path: {model_path}")
+        return None
 
 # Streamlit app
 def main():
     st.title("Track Popularity Prediction")
 
-    # Input fields
+    # Load the model
+    model = load_model(model_path)
+    
+    if model is None:
+        return  # Stop the app if the model couldn't be loaded
+
+    # Sidebar input fields
     st.sidebar.header("User Input")
     id = st.sidebar.text_input("ID", "1")
     name = st.sidebar.text_input("Name", "Track1")
@@ -42,7 +59,7 @@ def main():
             st.markdown(
                 f"""
                 <div class="main-content">
-                    <h2 style='font-size:30px;'>Prediction: {prediction_text}</h2>
+                    <h2 style='font-size:40px;'>Prediction: {prediction_text}</h2>
                 </div>
                 """,
                 unsafe_allow_html=True
