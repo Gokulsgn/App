@@ -6,7 +6,7 @@ import numpy as np
 
 # Load the pre-trained machine learning model
 def load_model():
-    with open(r'C:\Users\gokul\Documents\GitHub\App\App4\logistic_regression_model.pkl', 'rb') as file:
+    with open('logistic_regression_model.pkl', 'rb') as file:
         model = pickle.load(file)
     return model
 
