@@ -4,7 +4,7 @@ import joblib
 import os
 
 # Set the path to your model file
-model_path = 'trained_model.pkl'  # Ensure the file is in the correct location
+model_path = 'trained_model.pkl'  # Adjust if the model is in a subdirectory
 
 # Load the trained model
 def load_model(model_path):
@@ -16,8 +16,7 @@ def load_model(model_path):
             st.error(f"An error occurred while loading the model: {e}")
             return None
     else:
-        st.error("Model file not found. Please check the path.")
-        st.text(f"Checked path: {model_path}")
+        st.error(f"Model file not found. Checked path: {model_path}")
         return None
 
 # Streamlit app
