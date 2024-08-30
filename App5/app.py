@@ -3,10 +3,11 @@ import numpy as np
 import joblib
 import os
 
-# Debugging: Display current working directory
+# Debugging: Display current working directory and list files
 st.text(f"Current working directory: {os.getcwd()}")
+st.text(f"Files in the current directory: {', '.join(os.listdir(os.getcwd()))}")
 
-# Set the path to your model file (adjust if necessary)
+# Set the path to your model file
 model_path = 'trained_model.pkl'  # Ensure the file is in the correct location
 
 # Load the trained model
