@@ -29,8 +29,9 @@ def set_background(image_file):
     )
 
 
-# Open the image using the relative path
-img_contact_form = Image.open(r'C:\Users\gokul\Documents\GitHub\App\App3\Images\building-national-bank-switzerland-bern-bundesplatz-square-42890295.webp')
+# Assuming the image is in an 'Images' folder within the same directory as app.py
+img_contact_form = Image.open('Images/building-national-bank-switzerland-bern-bundesplatz-square-42890295.webp')
+
 
 # Use the image in your app (e.g., display it)
 st.image(img_contact_form, use_column_width=True)
