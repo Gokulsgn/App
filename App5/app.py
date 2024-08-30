@@ -1,10 +1,13 @@
 import streamlit as st
-import numpy as np  # Ensure numpy is imported
+import numpy as np
 import joblib
 import os
 
-# Set the path to your model file (assuming it's in the same directory as the script)
-model_path = 'trained_model.pkl'
+# Debugging: Display current working directory
+st.text(f"Current working directory: {os.getcwd()}")
+
+# Set the path to your model file (adjust if necessary)
+model_path = 'trained_model.pkl'  # Ensure the file is in the correct location
 
 # Load the trained model
 def load_model(model_path):
@@ -48,7 +51,7 @@ def main():
 
     # Create feature array
     input_data = [popularity, duration_ms, genre_encoded, explicit_encoded, duration_min]
-    input_data_as_numpy_array = np.asarray(input_data).reshape(1, -1)  # Ensure numpy is used here
+    input_data_as_numpy_array = np.asarray(input_data).reshape(1, -1)
 
     # Prediction button
     if st.button("Predict"):
