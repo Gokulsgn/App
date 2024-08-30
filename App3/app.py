@@ -1,7 +1,6 @@
 import streamlit as st
 import pickle
 from predict_page import preprocess_input, get_user_input
-from PIL import Image
 
 st.set_page_config(
     page_title="Loan Status Prediction",  # Title of the page
@@ -12,29 +11,7 @@ st.set_page_config(
 # Display the title of the app with the 'title' class to center it
 st.markdown("<h1 class='title'>Loan Status Prediction</h1>", unsafe_allow_html=True)
 
-# Function to set background image using CSS
-def set_background(image_file):
-    st.markdown(
-        f"""
-        <style>
-        .stApp {{
-            background-image: url({image_file});
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
 
-
-# Assuming the image is in an 'Images' folder within the same directory as app.py
-img_contact_form = Image.open('Images/building-national-bank-switzerland-bern-bundesplatz-square-42890295.webp')
-
-
-# Use the image in your app (e.g., display it)
-st.image(img_contact_form, use_column_width=True)
 
 
 # Load the pre-trained machine learning model
