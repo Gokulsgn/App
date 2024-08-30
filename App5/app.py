@@ -1,10 +1,12 @@
 import streamlit as st
-import numpy as np
 import joblib
 import os
 
-# Set the path to the model file (update this to your actual model path)
+# Set the path to the model file (update to your actual model path)
 model_path = r'C:\Users\gokul\Documents\GitHub\App\App5\trained_model.pkl'
+
+# Display the current working directory for debugging purposes
+st.text(f"Current working directory: {os.getcwd()}")
 
 # Load the trained model
 def load_model(model_path):
