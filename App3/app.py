@@ -11,9 +11,6 @@ st.set_page_config(
 # Display the title of the app with the 'title' class to center it
 st.markdown("<h1 class='title'>Loan Status Prediction</h1>", unsafe_allow_html=True)
 
-st.backgroud
-
-
 
 # Load the pre-trained machine learning model
 def load_model():

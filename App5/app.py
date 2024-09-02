@@ -1,33 +1,29 @@
 import streamlit as st
 import numpy as np
-import joblib
+import pickle
 import os
 
-# Set the path to your model file
-model_path = 'trained_model.pkl'  # Adjust if the model is in a subdirectory
+# Load the pre-trained machine learning model
+def load_model():
+    try:
+        model_path = os.path.join(os.path.dirname(__file__), 'trained_model.pkl')
+        st.write(f"Loading model from: {model_path}")
+        if not os.path.isfile(model_path):
+            raise FileNotFoundError(f"Model file not found: {model_path}")
+        
+        with open(model_path, 'rb') as file:
+            model = pickle.load(file)
+            st.write("Model successfully loaded.")
+    except Exception as e:
+        st.error(f"Error loading model: {e}")
+        model = None
+    return model
 
-# Check if model file exists and load it
-def load_model(model_path):
-    if os.path.exists(model_path):
-        try:
-            model = joblib.load(model_path)
-            return model
-        except Exception as e:
-            st.error(f"An error occurred while loading the model: {e}")
-            return None
-    else:
-        st.error(f"Model file not found. Checked path: {model_path}")
-        return None
+model = load_model()
 
 # Streamlit app
 def main():
     st.title("Track Popularity Prediction")
-
-    # Load the model
-    model = load_model(model_path)
-    
-    if model is None:
-        return  # Stop the app if the model couldn't be loaded
 
     # Sidebar input fields
     st.sidebar.header("User Input")
@@ -51,19 +47,27 @@ def main():
 
     # Prediction button
     if st.button("Predict"):
-        try:
-            prediction = model.predict(input_data_as_numpy_array)
-            prediction_text = 'Popular' if prediction[0] > 0.5 else 'Not Popular'
-            st.markdown(
-                f"""
-                <div class="main-content">
-                    <h2 style='font-size:40px;'>Prediction: {prediction_text}</h2>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-        except Exception as e:
-            st.error(f"An error occurred during prediction: {e}")
+        if model is not None:
+            try:
+                prediction = model.predict(input_data_as_numpy_array)
+                if hasattr(model, "predict_proba"):
+                    prediction_proba = model.predict_proba(input_data_as_numpy_array)
+                    prediction_text = f'Popular (Confidence: {prediction_proba[0][1]:.2f})' if prediction[0] > 0.5 else f'Not Popular (Confidence: {prediction_proba[0][0]:.2f})'
+                else:
+                    prediction_text = 'Popular' if prediction[0] > 0.5 else 'Not Popular'
+                
+                st.markdown(
+                    f"""
+                    <div class="main-content">
+                        <h2 style='font-size:40px;'>Prediction: {prediction_text}</h2>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+            except Exception as e:
+                st.error(f"An error occurred during prediction: {e}")
+        else:
+            st.error("Model is not loaded properly.")
 
 if __name__ == "__main__":
     main()
