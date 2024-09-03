@@ -12,13 +12,14 @@ st.set_page_config(
 st.markdown("<h1 class='title'>Loan Status Prediction</h1>", unsafe_allow_html=True)
 
 
-# Load the pre-trained machine learning model
 def load_model():
-    with open('loan_LR_model.pkl', 'rb') as file:
-        model = pickle.load(file)
-    return model
-
-model = load_model()
+    try:
+        with open('loan_LR_model.pkl', 'rb') as file:
+            model = pickle.load(file)
+        return model
+    except FileNotFoundError:
+        st.error("Model file not found. Please upload the model file.")
+        return None
 
 def main():
     # Inject custom CSS to change the background color and header styling
